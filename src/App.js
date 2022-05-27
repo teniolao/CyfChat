@@ -2,74 +2,50 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Message from "./Message";
-import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import Form from "./Form";
 
 function App() {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState([]);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
 
   function handleUserName(event) {
-    console.log(event.target.value);
     setUserName(event.target.value);
   }
 
   function handleMessage(event) {
-    console.log(event.target.value);
     setMessage(event.target.value);
   }
 
   useEffect(() => {
     fetch("https://teniolao-cyf-chat-server.glitch.me/messages")
       .then((res) => res.json())
-      .then((data) => setContent(data));
+      .then((data) => setContent(data))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
     <div className="App">
-      <nav className="navbar">
-        <h1>CYF Chat</h1>
-        <div>
-          <Link className="link" to="/">
-            Home
-          </Link>
-          <Link className="link" to="/message">
-            Posts
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
+
       <Routes>
         <Route
           path="/"
           element={
             <div className="body-wrapper">
               <h2>Send a message</h2>
-              {content && <p>{content[0].text}</p>}
-              <form action="/message" method="post">
-                {/* <p>{updateData}</p> */}
-                <label>Name:</label>
-                <input
-                  type="text"
-                  value={userName}
-                  onChange={handleUserName}
-                  placeholder="Your Name"
-                  required
-                />
 
-                <label> Message:</label>
-                <input
-                  type="text"
-                  value={message}
-                  onChange={handleMessage}
-                  placeholder="The message..."
-                  required
-                />
-                <button>Send</button>
-              </form>
+              <Form
+                userName={userName}
+                handleUserName={handleUserName}
+                message={message}
+                handleMessage={handleMessage}
+              />
             </div>
           }
         />
-        <Route path="/message" element={<Message />} />
+        <Route path="/message" element={<Message content={content} />} />
       </Routes>
     </div>
   );
