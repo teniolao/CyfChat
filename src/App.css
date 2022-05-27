@@ -1,1 +1,43 @@
+.navbar {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+}
+.navbar h1 {
+  color: #39141f;
+}
 
+.link {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  font-size: large;
+}
+.navbar .link:hover {
+  color: #f1356d;
+}
+
+.body-wrapper {
+  max-width: 400px;
+  margin: 50px auto;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+}
+
+.back-btn {
+  font-size: medium;
+}
+
+input{
+  width: 100%;
+  padding: 2px 5px;
+  margin: 3px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
