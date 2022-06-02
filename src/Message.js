@@ -1,14 +1,21 @@
 import React from "react";
 //import { Link } from "react-router-dom";
 
-function Message({ content }) {
+function Message() {
+  //const [content, setContent] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("https://teniolao-cyf-chat-server.glitch.me/messages")
+  //     .then((res) => res.json())
+  //     .then((data) => setContent(data))
+  //     .catch((error) => console.log(error));
+  // }, []);
+
   return (
     <div className="body-wrapper">
-      {/* <Link className="link back-btn" to="/">
-        Go back
-      </Link> */}
       <h2>Hello World</h2>
-      {content && <p>{content[0].text}</p>}
+      <p>hello</p>
+      {/* {content && <p>{content[0].text}</p>} */}
     </div>
   );
 }

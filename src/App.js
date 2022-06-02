@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Message from "./Message";
@@ -6,24 +6,7 @@ import Navbar from "./Navbar";
 import Form from "./Form";
 
 function App() {
-  const [content, setContent] = useState([]);
-  const [userName, setUserName] = useState("");
-  const [message, setMessage] = useState("");
-
-  function handleUserName(event) {
-    setUserName(event.target.value);
-  }
-
-  function handleMessage(event) {
-    setMessage(event.target.value);
-  }
-
-  useEffect(() => {
-    fetch("https://teniolao-cyf-chat-server.glitch.me/messages")
-      .then((res) => res.json())
-      .then((data) => setContent(data))
-      .catch((error) => console.log(error));
-  }, []);
+  //, timeSent: new Date().toLocaleDateString()
 
   return (
     <div className="App">
@@ -36,16 +19,11 @@ function App() {
             <div className="body-wrapper">
               <h2>Send a message</h2>
 
-              <Form
-                userName={userName}
-                handleUserName={handleUserName}
-                message={message}
-                handleMessage={handleMessage}
-              />
+              <Form />
             </div>
           }
         />
-        <Route path="/message" element={<Message content={content} />} />
+        <Route path="/message" element={<Message />} />
       </Routes>
     </div>
   );
