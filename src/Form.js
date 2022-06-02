@@ -5,18 +5,20 @@ function Form() {
   const [text, setText] = useState(""); // this is the textarea for message
   //console.log({ handleUserName, handleMessage, handleSubmit, from, text });
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const post = { from, text };
 
     //console.log(post);
 
-    fetch("https://teniolao-cyf-chat-server.glitch.me/messages", {
+    await fetch("https://teniolao-cyf-chat-server.glitch.me/messages", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(post),
-    }).then(() => console.log("new post added"));
+    });
+    console.log("new post added");
+    //.then(() => console.log("new post added"));
   }
 
   function handleUserName(event) {
@@ -54,7 +56,7 @@ function Form() {
           required
         ></textarea>
       </label>
-      <button>Send</button>
+      <button>Post</button>
     </form>
   );
 }

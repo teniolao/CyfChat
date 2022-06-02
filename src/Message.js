@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 
 function Message() {
-  //const [content, setContent] = useState([]);
+  const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("https://teniolao-cyf-chat-server.glitch.me/messages")
-  //     .then((res) => res.json())
-  //     .then((data) => setContent(data))
-  //     .catch((error) => console.log(error));
-  // }, []);
+  async function handleClick() {
+    const response = await fetch(
+      "https://teniolao-cyf-chat-server.glitch.me/messages",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    //console.log('result is:', JSON.stringify(result, null, 4));
+
+    setData(result);
+  }
 
   return (
     <div className="body-wrapper">
       <h2>Hello World</h2>
-      <p>hello</p>
-      {/* {content && <p>{content[0].text}</p>} */}
+      <button onClick={handleClick}>Fetch Data</button>
+      {data.map((property) => {
+        const { id, from, text } = property;
+        return (
+          <div key={id}>
+            <p>Name: {from}</p>
+            <p>Message: {text}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
